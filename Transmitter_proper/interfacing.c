@@ -23,7 +23,6 @@ int row = 0;
 char msg[1];
 char count_str[4];
 char keys[4][4];
-char data_char = 'A';
 
 int success;
 int prev_success;
@@ -42,8 +41,8 @@ void main(void)
 	keys_init();
 	while (1)
 		{
+			LCD_CmdWrite(0x80);			// Cursor to First line First Position
 			check_row();
-			send_char(data_char);
 		}
 }
  // FUNCTION_PURPOSE:LCD Initialization
@@ -189,10 +188,9 @@ void check_row()
 	if(success == 1 && prev_success == 0)
 	{
 		s_count++;
-		LCD_CmdWrite(0x80);			// Cursor to First line First Position
+		
 		msg[0] = keys[row-1][column-1];	
-		//send_char(msg[0]); 
-		data_char = msg[0];
+		send_char(msg[0]); 
 		count_str[3] = (char) ((s_count)%10 + 48);
 		count_str[2] = (char) ((s_count/10)%10 + 48);
 		count_str[1] = (char) ((s_count/100)%10 + 48);
