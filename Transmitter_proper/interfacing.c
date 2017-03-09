@@ -36,7 +36,7 @@ sbit LCD_busy = P2^7;								// LCD Busy Flag
 
 void main(void)
 {
-	Data_Out = 1;
+	Data_Out = 0;
 	LCD_Init();
 	keys_init();
 	while (1)
@@ -266,12 +266,13 @@ void check_column()
 	{
 		int a_int = (int) a;
 		int i;
-		int a_bits[8];
+		int a_bits[9];
 		for(i=0;i<8;i++)
 		{
 			a_bits[i] = a_int%2;
 			a_int = a_int/2;
 		}
+		a_bits[8] = 1;
 		for(i=0;i<8;i++)
 		{
 			send_bit(a_bits[i]);

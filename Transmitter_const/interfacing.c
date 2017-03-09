@@ -43,6 +43,7 @@ void main(void)
 	while (1)
 		{
 			send_char('A');
+			sdelay(1000);
 			//check_row();
 		}
 }
@@ -267,20 +268,21 @@ void check_column()
 	{
 		int a_int = (int) a;
 		int i;
-		int a_bits[8];
+		int a_bits[9];
 		for(i=0;i<8;i++)
 		{
 			a_bits[i] = a_int%2;
 			a_int = a_int/2;
 		}
-		for(i=0;i<8;i++)
+		a_bits[8] = 1;
+		for(i=0;i<9;i++)
 		{
 			send_bit(a_bits[i]);
 		}
 	}
 	void Timer_Init(int b)
 	{
-		TMOD = 0x10;
+		TMOD = 0x01;
 		if(b)
 		{
 			TH0 = 0xFE;
@@ -295,14 +297,15 @@ void check_column()
 	}
 	void send_bit( int b )
 	{
+		Data_Out = 0;
 		Timer_Init(b);
 		while(TF0 == 0);
 		TF0 = 0;
 		//invert here;
+		
 		Data_Out = 1;
 		Timer_Init(b);
 		while(TF0 == 0);
 		TF0 = 0;
 		//invert again
-		Data_Out = 0;
 	}

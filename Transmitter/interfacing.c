@@ -17,6 +17,7 @@ void sdelay(int delay);
 void keys_init();
 void send_char(char a);
 void send_bit(int b);
+void send_start_bit(void);
 
 int column = 0;
 int row = 0;
@@ -24,7 +25,7 @@ char msg[1];
 char count_str[4];
 char keys[4][4];
 char data_char = 'A';
-
+int a_bits[10] = {2,0,0,0,0,0,0,0,0,1};
 int success;
 int prev_success;
 int s_count = 0;
@@ -43,7 +44,6 @@ void main(void)
 	while (1)
 		{
 			check_row();
-			send_char(data_char);
 		}
 }
  // FUNCTION_PURPOSE:LCD Initialization
@@ -191,7 +191,9 @@ void check_row()
 		s_count++;
 		LCD_CmdWrite(0x80);			// Cursor to First line First Position
 		msg[0] = keys[row-1][column-1];	
-		//send_char(msg[0]); 
+		send_char(msg[0]); 
+		//msg[0] =  ((row+column)%3 + 48);
+		//send_bit( (row+column)%3 );
 		data_char = msg[0];
 		count_str[3] = (char) ((s_count)%10 + 48);
 		count_str[2] = (char) ((s_count/10)%10 + 48);
@@ -268,24 +270,45 @@ void check_column()
 	{
 		int a_int = (int) a;
 		int i;
-		int a_bits[8];
-		for(i=0;i<8;i++)
+		for(i=1;i<9;i++)
 		{
 			a_bits[i] = a_int%2;
 			a_int = a_int/2;
 		}
-		for(i=0;i<8;i++)
+		
+		Data_Out = 0;
+		
+		TMOD = 0x01;
+		TH0 = 0xFF;
+		TL0 = 0x06;
+		TR0 =1;
+		while(TF0 == 0);
+		TF0 = 0;
+		Data_Out = 1;
+		TMOD = 0x01;
+		TH0 = 0xFF;
+		TL0 = 0x06;//F830 FF06
+		TR0 =1;
+		while(TF0 == 0);
+		TF0 = 0;
+		
+		for(i=1;i<10;i++)
 		{
 			send_bit(a_bits[i]);
 		}
 	}
 	void Timer_Init(int b)
 	{
-		TMOD = 0x10;
-		if(b)
+		TMOD = 0x01;
+		if(b==1)
 		{
 			TH0 = 0xFE;
 			TL0 = 0x0C;
+		}
+		else if(b==2)
+		{
+			TH0 = 0xF8;
+			TL0 = 0x30;
 		}
 		else
 		{
@@ -296,6 +319,7 @@ void check_column()
 	}
 	void send_bit( int b )
 	{
+		Data_Out = 0;
 		Timer_Init(b);
 		while(TF0 == 0);
 		TF0 = 0;
@@ -304,6 +328,6 @@ void check_column()
 		Timer_Init(b);
 		while(TF0 == 0);
 		TF0 = 0;
+		TR0 = 0;
 		//invert again
-		Data_Out = 0;
 	}

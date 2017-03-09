@@ -1,0 +1,15 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+C:\Users\student\Documents\B13-EDL\trans\EDL-master\Transmitter_proper\keyboard.uvproj
+Project File Date:  02/26/2017
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling interfacing.c...
+linking...
+Program Size: data=60.0 xdata=0 code=1004
+creating hex file from ".\Objects\keyboard"...
+".\Objects\keyboard" - 0 Error(s), 0 Warning(s).

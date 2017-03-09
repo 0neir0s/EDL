@@ -1,10 +1,10 @@
-C51 COMPILER V9.55   INTERFACING                                                           02/15/2017 23:33:55 PAGE 1   
+C51 COMPILER V9.50a   INTERFACING                                                          03/02/2017 19:08:30 PAGE 1   
 
 
-C51 COMPILER V9.55, COMPILATION OF MODULE INTERFACING
+C51 COMPILER V9.50a, COMPILATION OF MODULE INTERFACING
 OBJECT MODULE PLACED IN .\Objects\interfacing.obj
-COMPILER INVOKED BY: C:\users\nocktowl\My Documents\Softwares\Keil\C51\BIN\C51.exe interfacing.c OPTIMIZE(8,SPEED) BROWS
-                    -E DEBUG OBJECTEXTEND PRINT(.\Listings\interfacing.lst) TABS(2) OBJECT(.\Objects\interfacing.obj)
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE interfacing.c BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\interfacing.lst) T
+                    -ABS(2) OBJECT(.\Objects\interfacing.obj)
 
 line level    source
 
@@ -45,295 +45,297 @@ line level    source
   35          sbit LCD_busy = P2^7;               // LCD Busy Flag
   36          
   37          void main(void)
-  38          {
-  39   1        Data_Out = 1;
+  38          {                                                                                                ;
+  39   1        Data_Out = 0;
   40   1        LCD_Init();
   41   1      //  keys_init();
   42   1      //  LCD_CmdWrite(0x80);     // Cursor to First line First Position
   43   1        while (1)
   44   1          {
   45   2            send_char('A');
-  46   2            //check_row();
-  47   2          }
-  48   1      }
-  49           // FUNCTION_PURPOSE:LCD Initialization
-  50           // FUNCTION_INPUTS: void
-  51           // FUNCTION_OUTPUTS: none
-  52           
-  53          void LCD_Init()
-  54          {
-C51 COMPILER V9.55   INTERFACING                                                           02/15/2017 23:33:55 PAGE 2   
+  46   2            sdelay(1000);
+  47   2            //check_row();
+  48   2          }
+  49   1      }
+  50           // FUNCTION_PURPOSE:LCD Initialization
+  51           // FUNCTION_INPUTS: void
+  52           // FUNCTION_OUTPUTS: none
+  53           
+  54          void LCD_Init()
+C51 COMPILER V9.50a   INTERFACING                                                          03/02/2017 19:08:30 PAGE 2   
 
-  55   1        sdelay(100);
-  56   1        LCD_CmdWrite(0x38);     // LCD 2lines, 5*7 matrix
-  57   1        LCD_CmdWrite(0x0E);     // Display ON cursor ON  Blinking off
-  58   1        LCD_CmdWrite(0x01);     // Clear the LCD
-  59   1        LCD_CmdWrite(0x80);     // Cursor to First line First Position
-  60   1      }
-  61          
+  55          {
+  56   1        sdelay(100);
+  57   1        LCD_CmdWrite(0x38);     // LCD 2lines, 5*7 matrix
+  58   1        LCD_CmdWrite(0x0E);     // Display ON cursor ON  Blinking off
+  59   1        LCD_CmdWrite(0x01);     // Clear the LCD
+  60   1        LCD_CmdWrite(0x80);     // Cursor to First line First Position
+  61   1      }
   62          
-  63          /**
-  64           * FUNCTION_PURPOSE: Write Command to LCD
-  65           * FUNCTION_INPUTS: cmd- command to be written
-  66           * FUNCTION_OUTPUTS: none
-  67           */
-  68          void LCD_CmdWrite(char cmd)
-  69          {
-  70   1        LCD_Ready();
-  71   1        LCD_data=cmd;           // Send the command to LCD
-  72   1        LCD_rs=0;               // Select the Command Register by pulling LCD_rs LOW
-  73   1        LCD_rw=0;               // Select the Write Operation  by pulling RW LOW
-  74   1        LCD_en=1;               // Send a High-to-Low Pusle at Enable Pin
-  75   1        sdelay(5);
-  76   1        LCD_en=0;
-  77   1        sdelay(5);
-  78   1      }
-  79          
-  80          /**
-  81           * FUNCTION_PURPOSE: Write Command to LCD
-  82           * FUNCTION_INPUTS: dat- data to be written
-  83           * FUNCTION_OUTPUTS: none
-  84           */
-  85          void LCD_DataWrite( char dat)
-  86          {
-  87   1        LCD_Ready();
-  88   1        LCD_data=dat;           // Send the data to LCD
-  89   1        LCD_rs=1;               // Select the Data Register by pulling LCD_rs HIGH
-  90   1        LCD_rw=0;               // Select the Write Operation by pulling RW LOW
-  91   1        LCD_en=1;               // Send a High-to-Low Pusle at Enable Pin
-  92   1        sdelay(5);
-  93   1        LCD_en=0;
-  94   1        sdelay(5);
-  95   1      }
-  96          /**
-  97           * FUNCTION_PURPOSE: Write a string on the LCD Screen
-  98           * FUNCTION_INPUTS: 1. str - pointer to the string to be written, 
-  99                              2. length - length of the array
- 100           * FUNCTION_OUTPUTS: none
- 101           */
- 102          void LCD_StringWrite( char * str, unsigned char length)
- 103          {
- 104   1          while(length>0)
- 105   1          {
- 106   2              LCD_DataWrite(*str);
- 107   2              str++;
- 108   2              length--;
- 109   2          }
- 110   1      }
- 111          
- 112          /**
- 113           * FUNCTION_PURPOSE: To check if the LCD is ready to communicate
- 114           * FUNCTION_INPUTS: void
- 115           * FUNCTION_OUTPUTS: none
- 116           */
-C51 COMPILER V9.55   INTERFACING                                                           02/15/2017 23:33:55 PAGE 3   
+  63          
+  64          /**
+  65           * FUNCTION_PURPOSE: Write Command to LCD
+  66           * FUNCTION_INPUTS: cmd- command to be written
+  67           * FUNCTION_OUTPUTS: none
+  68           */
+  69          void LCD_CmdWrite(char cmd)
+  70          {
+  71   1        LCD_Ready();
+  72   1        LCD_data=cmd;           // Send the command to LCD
+  73   1        LCD_rs=0;               // Select the Command Register by pulling LCD_rs LOW
+  74   1        LCD_rw=0;               // Select the Write Operation  by pulling RW LOW
+  75   1        LCD_en=1;               // Send a High-to-Low Pusle at Enable Pin
+  76   1        sdelay(5);
+  77   1        LCD_en=0;
+  78   1        sdelay(5);
+  79   1      }
+  80          
+  81          /**
+  82           * FUNCTION_PURPOSE: Write Command to LCD
+  83           * FUNCTION_INPUTS: dat- data to be written
+  84           * FUNCTION_OUTPUTS: none
+  85           */
+  86          void LCD_DataWrite( char dat)
+  87          {
+  88   1        LCD_Ready();
+  89   1        LCD_data=dat;           // Send the data to LCD
+  90   1        LCD_rs=1;               // Select the Data Register by pulling LCD_rs HIGH
+  91   1        LCD_rw=0;               // Select the Write Operation by pulling RW LOW
+  92   1        LCD_en=1;               // Send a High-to-Low Pusle at Enable Pin
+  93   1        sdelay(5);
+  94   1        LCD_en=0;
+  95   1        sdelay(5);
+  96   1      }
+  97          /**
+  98           * FUNCTION_PURPOSE: Write a string on the LCD Screen
+  99           * FUNCTION_INPUTS: 1. str - pointer to the string to be written, 
+ 100                              2. length - length of the array
+ 101           * FUNCTION_OUTPUTS: none
+ 102           */
+ 103          void LCD_StringWrite( char * str, unsigned char length)
+ 104          {
+ 105   1          while(length>0)
+ 106   1          {
+ 107   2              LCD_DataWrite(*str);
+ 108   2              str++;
+ 109   2              length--;
+ 110   2          }
+ 111   1      }
+ 112          
+ 113          /**
+ 114           * FUNCTION_PURPOSE: To check if the LCD is ready to communicate
+ 115           * FUNCTION_INPUTS: void
+ 116           * FUNCTION_OUTPUTS: none
+C51 COMPILER V9.50a   INTERFACING                                                          03/02/2017 19:08:30 PAGE 3   
 
- 117          void LCD_Ready()
- 118          {
- 119   1        LCD_data = 0xFF;
- 120   1        LCD_rs = 0;
- 121   1        LCD_rw = 1;
- 122   1        LCD_en = 0;
- 123   1        sdelay(5);
- 124   1        LCD_en = 1;
- 125   1        while(LCD_busy == 1)
- 126   1        {
- 127   2          LCD_en = 0;
- 128   2          LCD_en = 1;
- 129   2        }
- 130   1        LCD_en = 0;
- 131   1      }
- 132          
- 133          /**
- 134           * FUNCTION_PURPOSE: A delay of 15us for a 24 MHz crystal
- 135           * FUNCTION_INPUTS: void
- 136           * FUNCTION_OUTPUTS: none
- 137           */
- 138          void sdelay(int delay)
- 139          {
- 140   1        char d=0;
- 141   1        while(delay>0)
- 142   1        {
- 143   2          for(d=0;d<5;d++);
- 144   2          delay--;
- 145   2        }
- 146   1      }
- 147          
- 148          void check_row()
- 149          {
- 150   1          //row = 0;
- 151   1          success = 1;
- 152   1          P3 = 0x7F;
- 153   1          if(P3 != 0x7F)
- 154   1          {
- 155   2            row = 1;
- 156   2            check_column();
- 157   2          }
- 158   1          else
- 159   1          {
- 160   2            P3 = 0xBF;
- 161   2            if(P3 != 0xBF)
- 162   2            {
- 163   3              row = 2;
- 164   3              check_column();
- 165   3            }
- 166   2            else
- 167   2            {
- 168   3              P3 = 0xDF;
- 169   3              if(P3 != 0xDF)
- 170   3              {
- 171   4                row = 3;
- 172   4                check_column();
- 173   4              }
- 174   3              else
- 175   3              {
- 176   4                P3 = 0xEF;
- 177   4                if(P3 != 0xEF)
- 178   4                {
-C51 COMPILER V9.55   INTERFACING                                                           02/15/2017 23:33:55 PAGE 4   
+ 117           */
+ 118          void LCD_Ready()
+ 119          {
+ 120   1        LCD_data = 0xFF;
+ 121   1        LCD_rs = 0;
+ 122   1        LCD_rw = 1;
+ 123   1        LCD_en = 0;
+ 124   1        sdelay(5);
+ 125   1        LCD_en = 1;
+ 126   1        while(LCD_busy == 1)
+ 127   1        {
+ 128   2          LCD_en = 0;
+ 129   2          LCD_en = 1;
+ 130   2        }
+ 131   1        LCD_en = 0;
+ 132   1      }
+ 133          
+ 134          /**
+ 135           * FUNCTION_PURPOSE: A delay of 15us for a 24 MHz crystal
+ 136           * FUNCTION_INPUTS: void
+ 137           * FUNCTION_OUTPUTS: none
+ 138           */
+ 139          void sdelay(int delay)
+ 140          {
+ 141   1        char d=0;
+ 142   1        while(delay>0)
+ 143   1        {
+ 144   2          for(d=0;d<5;d++);
+ 145   2          delay--;
+ 146   2        }
+ 147   1      }
+ 148          
+ 149          void check_row()
+ 150          {
+ 151   1          //row = 0;
+ 152   1          success = 1;
+ 153   1          P3 = 0x7F;
+ 154   1          if(P3 != 0x7F)
+ 155   1          {
+ 156   2            row = 1;
+ 157   2            check_column();
+ 158   2          }
+ 159   1          else
+ 160   1          {
+ 161   2            P3 = 0xBF;
+ 162   2            if(P3 != 0xBF)
+ 163   2            {
+ 164   3              row = 2;
+ 165   3              check_column();
+ 166   3            }
+ 167   2            else
+ 168   2            {
+ 169   3              P3 = 0xDF;
+ 170   3              if(P3 != 0xDF)
+ 171   3              {
+ 172   4                row = 3;
+ 173   4                check_column();
+ 174   4              }
+ 175   3              else
+ 176   3              {
+ 177   4                P3 = 0xEF;
+ 178   4                if(P3 != 0xEF)
+C51 COMPILER V9.50a   INTERFACING                                                          03/02/2017 19:08:30 PAGE 4   
 
- 179   5                  row = 4;
- 180   5                  check_column();
- 181   5                }
- 182   4                else
- 183   4                {
- 184   5                  success = 0;
- 185   5                }
- 186   4              }
- 187   3            }
- 188   2          }
- 189   1        if(success == 1 && prev_success == 0)
- 190   1        {
- 191   2          s_count++;
- 192   2          
- 193   2          msg[0] = keys[row-1][column-1]; 
- 194   2          send_char(msg[0]); 
- 195   2          count_str[3] = (char) ((s_count)%10 + 48);
- 196   2          count_str[2] = (char) ((s_count/10)%10 + 48);
- 197   2          count_str[1] = (char) ((s_count/100)%10 + 48);
- 198   2          count_str[0] = '_'; 
- 199   2          LCD_StringWrite(msg,1);
- 200   2          LCD_StringWrite(count_str,4); 
- 201   2        }
- 202   1      //  rc[1] = (char) (column + 48);
- 203   1      //  rc[0] = (char) (row + 48);  
- 204   1        
+ 179   4                {
+ 180   5                  row = 4;
+ 181   5                  check_column();
+ 182   5                }
+ 183   4                else
+ 184   4                {
+ 185   5                  success = 0;
+ 186   5                }
+ 187   4              }
+ 188   3            }
+ 189   2          }
+ 190   1        if(success == 1 && prev_success == 0)
+ 191   1        {
+ 192   2          s_count++;
+ 193   2          
+ 194   2          msg[0] = keys[row-1][column-1]; 
+ 195   2          send_char(msg[0]); 
+ 196   2          count_str[3] = (char) ((s_count)%10 + 48);
+ 197   2          count_str[2] = (char) ((s_count/10)%10 + 48);
+ 198   2          count_str[1] = (char) ((s_count/100)%10 + 48);
+ 199   2          count_str[0] = '_'; 
+ 200   2          LCD_StringWrite(msg,1);
+ 201   2          LCD_StringWrite(count_str,4); 
+ 202   2        }
+ 203   1      //  rc[1] = (char) (column + 48);
+ 204   1      //  rc[0] = (char) (row + 48);  
  205   1        
- 206   1        prev_success = success;
- 207   1      } 
- 208          
- 209          void check_column()
- 210          {
- 211   1          //column = 0;
- 212   1          P3 = 0xF7;
- 213   1          if(P3 != 0xF7)
- 214   1          {
- 215   2            column = 1;
- 216   2          }
- 217   1          else
- 218   1          {
- 219   2            P3 = 0xFB;
- 220   2            if(P3 != 0xFB)
- 221   2            {
- 222   3              column = 2;
- 223   3            }
- 224   2            else
- 225   2            {
- 226   3              P3 = 0xFD;
- 227   3              if(P3 != 0xFD)
- 228   3              {
- 229   4                column = 3;
- 230   4              }
- 231   3              else
- 232   3              {
- 233   4                P3 = 0xFE;
- 234   4                if(P3 != 0xFE)
- 235   4                {
- 236   5                  column = 4;
- 237   5                }
- 238   4              }
- 239   3            }
- 240   2          }
-C51 COMPILER V9.55   INTERFACING                                                           02/15/2017 23:33:55 PAGE 5   
+ 206   1        
+ 207   1        prev_success = success;
+ 208   1      } 
+ 209          
+ 210          void check_column()
+ 211          {
+ 212   1          //column = 0;
+ 213   1          P3 = 0xF7;
+ 214   1          if(P3 != 0xF7)
+ 215   1          {
+ 216   2            column = 1;
+ 217   2          }
+ 218   1          else
+ 219   1          {
+ 220   2            P3 = 0xFB;
+ 221   2            if(P3 != 0xFB)
+ 222   2            {
+ 223   3              column = 2;
+ 224   3            }
+ 225   2            else
+ 226   2            {
+ 227   3              P3 = 0xFD;
+ 228   3              if(P3 != 0xFD)
+ 229   3              {
+ 230   4                column = 3;
+ 231   4              }
+ 232   3              else
+ 233   3              {
+ 234   4                P3 = 0xFE;
+ 235   4                if(P3 != 0xFE)
+ 236   4                {
+ 237   5                  column = 4;
+ 238   5                }
+ 239   4              }
+ 240   3            }
+C51 COMPILER V9.50a   INTERFACING                                                          03/02/2017 19:08:30 PAGE 5   
 
- 241   1        }
- 242          
- 243            void keys_init(void)
- 244            {
- 245   1          keys[0][0] = '1';
- 246   1          keys[0][1] = '2';
- 247   1          keys[0][2] = '3';
- 248   1          keys[0][3] = 'A';
- 249   1          
- 250   1          keys[1][0] = '4';
- 251   1          keys[1][1] = '5';
- 252   1          keys[1][2] = '6';
- 253   1          keys[1][3] = 'B';
- 254   1          
- 255   1          keys[2][0] = '7';
- 256   1          keys[2][1] = '8';
- 257   1          keys[2][2] = '9';
- 258   1          keys[2][3] = 'C';
- 259   1          
- 260   1          keys[3][0] = '*';
- 261   1          keys[3][1] = '0';
- 262   1          keys[3][2] = '#';
- 263   1          keys[3][3] = 'D';
- 264   1        }
- 265            
- 266            void send_char( char a )
- 267            {
- 268   1          int a_int = (int) a;
- 269   1          int i;
- 270   1          int a_bits[8];
- 271   1          for(i=0;i<8;i++)
- 272   1          {
- 273   2            a_bits[i] = a_int%2;
- 274   2            a_int = a_int/2;
- 275   2          }
- 276   1          for(i=0;i<8;i++)
- 277   1          {
- 278   2            send_bit(a_bits[i]);
- 279   2          }
- 280   1        }
- 281            void Timer_Init(int b)
- 282            {
- 283   1          TMOD = 0x10;
- 284   1          if(b)
- 285   1          {
- 286   2            TH0 = 0xFE;
- 287   2            TL0 = 0x0C;
- 288   2          }
- 289   1          else
- 290   1          {
- 291   2            TH0 = 0xFC;
- 292   2            TL0 = 0x18;
- 293   2          }
- 294   1          TR0 = 1;
- 295   1        }
- 296            void send_bit( int b )
- 297            {
- 298   1          Timer_Init(b);
- 299   1          while(TF0 == 0);
- 300   1          TF0 = 0;
- 301   1          //invert here;
- 302   1          Data_Out = 1;
-C51 COMPILER V9.55   INTERFACING                                                           02/15/2017 23:33:55 PAGE 6   
+ 241   2          }
+ 242   1        }
+ 243          
+ 244            void keys_init(void)
+ 245            {
+ 246   1          keys[0][0] = '1';
+ 247   1          keys[0][1] = '2';
+ 248   1          keys[0][2] = '3';
+ 249   1          keys[0][3] = 'A';
+ 250   1          
+ 251   1          keys[1][0] = '4';
+ 252   1          keys[1][1] = '5';
+ 253   1          keys[1][2] = '6';
+ 254   1          keys[1][3] = 'B';
+ 255   1          
+ 256   1          keys[2][0] = '7';
+ 257   1          keys[2][1] = '8';
+ 258   1          keys[2][2] = '9';
+ 259   1          keys[2][3] = 'C';
+ 260   1          
+ 261   1          keys[3][0] = '*';
+ 262   1          keys[3][1] = '0';
+ 263   1          keys[3][2] = '#';
+ 264   1          keys[3][3] = 'D';
+ 265   1        }
+ 266            
+ 267            void send_char( char a )
+ 268            {
+ 269   1          int a_int = (int) a;
+ 270   1          int i;
+ 271   1          int a_bits[9];
+ 272   1          for(i=0;i<8;i++)
+ 273   1          {
+ 274   2            a_bits[i] = a_int%2;
+ 275   2            a_int = a_int/2;
+ 276   2          }
+ 277   1          a_bits[8] = 1;
+ 278   1          for(i=0;i<9;i++)
+ 279   1          {
+ 280   2            send_bit(a_bits[i]);
+ 281   2          }
+ 282   1        }
+ 283            void Timer_Init(int b)
+ 284            {
+ 285   1          TMOD = 0x01;
+ 286   1          if(b)
+ 287   1          {
+ 288   2            TH0 = 0xFE;
+ 289   2            TL0 = 0x0C;
+ 290   2          }
+ 291   1          else
+ 292   1          {
+ 293   2            TH0 = 0xFC;
+ 294   2            TL0 = 0x18;
+ 295   2          }
+ 296   1          TR0 = 1;
+ 297   1        }
+ 298            void send_bit( int b )
+ 299            {
+ 300   1          Timer_Init(b);
+ 301   1          while(TF0 == 0);
+ 302   1          TF0 = 1;
+C51 COMPILER V9.50a   INTERFACING                                                          03/02/2017 19:08:30 PAGE 6   
 
- 303   1          Timer_Init(b);
- 304   1          while(TF0 == 0);
- 305   1          TF0 = 0;
- 306   1          //invert again
- 307   1          Data_Out = 0;
- 308   1        }
+ 303   1          //invert here;
+ 304   1          Data_Out = 1;
+ 305   1          Timer_Init(b);
+ 306   1          while(TF0 == 0);
+ 307   1          TF0 = 0;
+ 308   1          //invert again
+ 309   1          Data_Out = 0;
+ 310   1        }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    672    ----
+   CODE SIZE        =    685    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =     31      24
+   DATA SIZE        =     31      26
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.

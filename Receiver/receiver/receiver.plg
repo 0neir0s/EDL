@@ -1,0 +1,157 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+C:\Users\student\Documents\B13-EDL\receiver\receiver.uvproj
+Project File Date:  02/27/2017
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling receiver.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_LCD_STRINGWRITE?RECEIVER
+Program Size: data=15.0 xdata=0 code=224
+"receiver" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling receiver.c...
+receiver.c(16): error C141: syntax error near ';'
+receiver.c(29): error C141: syntax error near 'int'
+receiver.c(29): error C202: 'i': undefined identifier
+receiver.c(29): error C202: 'i': undefined identifier
+receiver.c(29): error C202: 'i': undefined identifier
+receiver.c(29): error C141: syntax error near ')'
+receiver.c(135): error C202: 'IE': undefined identifier
+receiver.c(135): error C141: syntax error near '='
+receiver.c(136): error C202: 'IE': undefined identifier
+receiver.c(136): error C141: syntax error near '='
+receiver.c(141): error C202: 'ex0_isr_counter': undefined identifier
+Target not created
+Build target 'Target 1'
+compiling receiver.c...
+receiver.c(16): error C141: syntax error near ';'
+receiver.c(29): error C141: syntax error near 'int'
+receiver.c(29): error C202: 'i': undefined identifier
+receiver.c(29): error C202: 'i': undefined identifier
+receiver.c(29): error C202: 'i': undefined identifier
+receiver.c(29): error C141: syntax error near ')'
+receiver.c(135): error C202: 'IE': undefined identifier
+receiver.c(135): error C141: syntax error near '='
+receiver.c(136): error C202: 'IE': undefined identifier
+receiver.c(136): error C141: syntax error near '='
+Target not created
+Build target 'Target 1'
+compiling receiver.c...
+receiver.c(16): error C141: syntax error near ';'
+receiver.c(29): error C141: syntax error near 'int'
+receiver.c(29): error C202: 'i': undefined identifier
+receiver.c(29): error C202: 'i': undefined identifier
+receiver.c(29): error C202: 'i': undefined identifier
+receiver.c(29): error C141: syntax error near ')'
+Target not created
+Build target 'Target 1'
+compiling receiver.c...
+receiver.c(16): error C141: syntax error near ';'
+receiver.c(32): error C202: 'on_flag': undefined identifier
+Target not created
+Build target 'Target 1'
+compiling receiver.c...
+receiver.c(16): error C141: syntax error near ';'
+Target not created
+Build target 'Target 1'
+compiling receiver.c...
+receiver.c(28): error C202: 'time_meas': undefined identifier
+receiver.c(29): error C202: 'time_meas': undefined identifier
+receiver.c(29): error C202: 'RX_bit': undefined identifier
+receiver.c(30): error C202: 'RX_bit': undefined identifier
+receiver.c(39): error C202: 'i': undefined identifier
+Target not created
+Build target 'Target 1'
+compiling receiver.c...
+receiver.c(32): error C202: 'IE0': undefined identifier
+receiver.c(36): error C202: 'time_meas': undefined identifier
+receiver.c(37): error C202: 'time_meas': undefined identifier
+receiver.c(46): error C141: syntax error near '}'
+Target not created
+Build target 'Target 1'
+compiling receiver.c...
+receiver.c(32): error C202: 'IE0': undefined identifier
+receiver.c(36): error C202: 'time_meas': undefined identifier
+receiver.c(37): error C202: 'time_meas': undefined identifier
+receiver.c(46): error C141: syntax error near 'int'
+Target not created
+Build target 'Target 1'
+compiling receiver.c...
+receiver.c(32): error C202: 'IE0': undefined identifier
+receiver.c(46): error C141: syntax error near 'int'
+Target not created
+Build target 'Target 1'
+compiling receiver.c...
+receiver.c(42): warning C276: constant in condition expression
+receiver.c(45): error C141: syntax error near 'int'
+Target not created
+Build target 'Target 1'
+compiling receiver.c...
+receiver.c(42): warning C276: constant in condition expression
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_LCD_STRINGWRITE?RECEIVER
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?MEAS_INIT?RECEIVER
+Program Size: data=53.0 xdata=0 code=541
+"receiver" - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+compiling receiver.c...
+receiver.c(43): warning C276: constant in condition expression
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_LCD_STRINGWRITE?RECEIVER
+Program Size: data=53.0 xdata=0 code=552
+"receiver" - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+compiling receiver.c...
+receiver.c(44): warning C276: constant in condition expression
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_LCD_STRINGWRITE?RECEIVER
+Program Size: data=53.0 xdata=0 code=583
+"receiver" - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+compiling receiver.c...
+receiver.c(44): warning C276: constant in condition expression
+linking...
+Program Size: data=52.0 xdata=0 code=594
+"receiver" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling receiver.c...
+receiver.c(44): warning C276: constant in condition expression
+linking...
+Program Size: data=52.0 xdata=0 code=594
+"receiver" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=52.0 xdata=0 code=594
+creating hex file from "receiver"...
+"receiver" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling receiver.c...
+receiver.c(44): warning C276: constant in condition expression
+linking...
+Program Size: data=52.0 xdata=0 code=594
+creating hex file from "receiver"...
+"receiver" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling receiver.c...
+receiver.c(45): warning C276: constant in condition expression
+linking...
+Program Size: data=36.0 xdata=0 code=582
+creating hex file from "receiver"...
+"receiver" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling receiver.c...
+receiver.c(45): warning C276: constant in condition expression
+linking...
+Program Size: data=36.0 xdata=0 code=582
+creating hex file from "receiver"...
+"receiver" - 0 Error(s), 1 Warning(s).
